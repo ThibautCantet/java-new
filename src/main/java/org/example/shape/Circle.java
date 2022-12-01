@@ -1,4 +1,4 @@
-package org.example;
+package org.example.shape;
 
 public record Circle(double radius) implements Shape {
 }
