@@ -1,4 +1,4 @@
-package org.example.record_pattern;
+package org.example.record_pattern.with_interface;
 
 public final class SecondMyInterfaceImpl implements MyInterface {
     @Override

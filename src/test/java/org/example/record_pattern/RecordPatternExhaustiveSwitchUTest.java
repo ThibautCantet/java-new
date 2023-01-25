@@ -1,6 +1,11 @@
 package org.example.record_pattern;
 
 
+import org.example.record_pattern.with_class.A;
+import org.example.record_pattern.with_class.B;
+import org.example.record_pattern.with_interface.FirstMyInterfaceImpl;
+import org.example.record_pattern.with_interface.MyInterface;
+import org.example.record_pattern.with_interface.SecondMyInterfaceImpl;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +21,7 @@ class RecordPatternExhaustiveSwitchUTest {
                     (MyInterface) new FirstMyInterfaceImpl(),
                     new FirstMyInterfaceImpl());
 
-            var recordPatternExhaustiveSwitch = new RecordPatternExhaustiveSwitch(pair);
+            var recordPatternExhaustiveSwitch = RecordPatternExhaustiveSwitch.create(pair);
 
             String result = recordPatternExhaustiveSwitch.switchPattern();
 
@@ -29,7 +34,7 @@ class RecordPatternExhaustiveSwitchUTest {
                     new FirstMyInterfaceImpl(),
                     new SecondMyInterfaceImpl());
 
-            var recordPatternExhaustiveSwitch = new RecordPatternExhaustiveSwitch(pair);
+            var recordPatternExhaustiveSwitch = RecordPatternExhaustiveSwitch.create(pair);
 
             String result = recordPatternExhaustiveSwitch.switchPattern();
 
@@ -45,7 +50,7 @@ class RecordPatternExhaustiveSwitchUTest {
                     new FirstMyInterfaceImpl(),
                     (MyInterface) new FirstMyInterfaceImpl());
 
-            var recordPatternExhaustiveSwitch = new RecordPatternExhaustiveSwitch(pair);
+            var recordPatternExhaustiveSwitch = RecordPatternExhaustiveSwitch.create(pair);
 
             String result = recordPatternExhaustiveSwitch.switchPattern2();
 
@@ -58,7 +63,7 @@ class RecordPatternExhaustiveSwitchUTest {
                     new SecondMyInterfaceImpl(),
                     new FirstMyInterfaceImpl());
 
-            var recordPatternExhaustiveSwitch = new RecordPatternExhaustiveSwitch(pair);
+            var recordPatternExhaustiveSwitch = RecordPatternExhaustiveSwitch.create(pair);
 
             String result = recordPatternExhaustiveSwitch.switchPattern2();
 
@@ -71,11 +76,63 @@ class RecordPatternExhaustiveSwitchUTest {
                     new SecondMyInterfaceImpl(),
                     new SecondMyInterfaceImpl());
 
-            var recordPatternExhaustiveSwitch = new RecordPatternExhaustiveSwitch(pair);
+            var recordPatternExhaustiveSwitch = RecordPatternExhaustiveSwitch.create(pair);
 
             String result = recordPatternExhaustiveSwitch.switchPattern2();
 
             assertThat(result).isEqualTo("SecondMyInterfaceImpl-SecondMyInterfaceImpl");
         }
     }
+
+    @Nested
+    class SwitchPatternWithClass {
+        @Test
+        void should_return_b_b_when_b_and_b_as_parameters() {
+            RecordPatternExhaustiveSwitch.Pair<A> pair = new RecordPatternExhaustiveSwitch.Pair<>(
+                    new B(),
+                    new B());
+            var recordPatternExhaustiveSwitch = RecordPatternExhaustiveSwitch.createWithClass(pair);
+
+            String result = recordPatternExhaustiveSwitch.switchPatternWithClass();
+
+            assertThat(result).isEqualTo("B-B");
+        }
+
+        @Test
+        void should_return_a_b_when_a_and_b_as_parameters() {
+            var pair = new RecordPatternExhaustiveSwitch.Pair<>(
+                    new A(),
+                    new B());
+            var recordPatternExhaustiveSwitch = RecordPatternExhaustiveSwitch.createWithClass(pair);
+
+            String result = recordPatternExhaustiveSwitch.switchPatternWithClass();
+
+            assertThat(result).isEqualTo("A-B");
+        }
+
+        @Test
+        void should_return_b_a_when_b_and_a_as_parameters() {
+            var pair = new RecordPatternExhaustiveSwitch.Pair<>(
+                    new B(),
+                    new A());
+            var recordPatternExhaustiveSwitch = RecordPatternExhaustiveSwitch.createWithClass(pair);
+
+            String result = recordPatternExhaustiveSwitch.switchPatternWithClass();
+
+            assertThat(result).isEqualTo("B-A");
+        }
+
+        @Test
+        void should_return_a_a_when_a_and_a_as_parameters() {
+            var pair = new RecordPatternExhaustiveSwitch.Pair<>(
+                    new A(),
+                    new A());
+            var recordPatternExhaustiveSwitch = RecordPatternExhaustiveSwitch.createWithClass(pair);
+
+            String result = recordPatternExhaustiveSwitch.switchPatternWithClass();
+
+            assertThat(result).isEqualTo("A-A");
+        }
+    }
+
 }
