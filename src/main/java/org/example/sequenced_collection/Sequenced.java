@@ -17,32 +17,30 @@ public class Sequenced {
     }
 
     List<Integer> reverse() {
-        return collection.stream()
-                .sorted(Collections.reverseOrder())
-                .toList();
+        return collection.reversed();
     }
 
     Integer getLast() {
-        return collection.get(collection.size()-1);
+        return collection.getLast();
     }
 
     void addLast(int i) {
-        collection.add(i);
+        collection.addLast(i);
     }
 
     void removeLast() {
-        collection.remove(collection.size() - 1);
+        collection.removeLast();
     }
 
     Integer getFirst() {
-        return collection.get(0);
+        return collection.getFirst();
     }
 
     void addFirst(int i) {
-        collection.add(0, i);
+        collection.addFirst(i);
     }
 
     void removeFirst() {
-        collection.remove(0);
+        collection.removeFirst();
     }
 }
