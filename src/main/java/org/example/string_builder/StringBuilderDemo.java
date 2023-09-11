@@ -4,9 +4,7 @@ public class StringBuilderDemo {
 
     public String duplicate(String value, int times) {
         var stringBuilder = new StringBuilder();
-        for (int i = 0; i < times; i++) {
-            stringBuilder.append(value);
-        }
+        stringBuilder.repeat(value, times);
         return stringBuilder.toString();
     }
 }
