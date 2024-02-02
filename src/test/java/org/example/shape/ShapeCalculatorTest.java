@@ -3,7 +3,6 @@ package org.example.shape;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class ShapeCalculatorTest {
 
@@ -29,7 +28,7 @@ class ShapeCalculatorTest {
 
     @Test
     void getPerimeter_should_throw_exception_when_not_a_valid_shape() {
-        var shape = mock(Shape.class);
+        var shape = new CustomShape();
 
         Throwable throwable = catchThrowable(() -> shapeCalculator.getPerimeter(shape));
 
@@ -37,4 +36,5 @@ class ShapeCalculatorTest {
                 .hasMessage("Unrecognized shape");
     }
 
+    private record CustomShape() implements Shape {}
 }
